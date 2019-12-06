@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="lights.js"></script>
+<script>
+function go() {
+	let lights = [
+		createLight("red", 10),
+		createLight("red", 10),
+		createLight("red", 10),
+		createLight("red", 10),
+		createLight("red", 10),
+		createLight("red", 10),
+		createLight("red", 10),
+		createLight("red", 10),
+		createLight("red", 10),
+		createLight("red", 10),
+		createLight("red", 10),
+		createLight("red", 10),
+		createLight("red", 10),
+		createLight("red", 10),
+		createLight("red", 10),
+		createLight("red", 10),
+	];
+	
+	setLightColor(lights[3], "lime");
+	
+	for (let i=0; i<lights.length; i++)
+		if (i % 2 == 0) turnOn(lights[i]);
+	
+	setInterval(function(){
+		for (let i=0; i<lights.length; i++) {
+			if (isOn(lights[i]))
+				turnOff(lights[i]);
+			else turnOn(lights[i]);
+		}
+	}, 500);
+}
+</script>
+</head>
+<body style="background: black;" onload="go();">
+</body>
+</html>
