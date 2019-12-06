@@ -3,9 +3,11 @@
  * @param {string} color The light's color (i.e. "blue" or "#000033")
  * @param {number} [size] The light's size, in pixels (default is 20)
  * @param {number} [rotation] The light's rotation, in degrees
+ * @param {Element} [putHere] Where to put the light once it's created
  * @returns {Element} A DIV with the CSS required to make it a light
  */
-function createLight(color, size, rotation) {
+function createLight(color, size, rotation, putHere) {
+	if (!putHere) putHere = document.body;
 	if (!rotation) rotation = 0;
 	if (!size) size = 20;
 	rotation -= 45;	// so the default is straight
@@ -16,7 +18,7 @@ function createLight(color, size, rotation) {
 	l.style.backgroundColor = color;
 	l.style.borderRadius = "100% 4px";
 	l.style.transform = "rotate(" + rotation + "deg)";
-	document.body.appendChild(l);
+	putHere.appendChild(l);
 	turnOff(l);
 	return l;
 }
@@ -56,4 +58,22 @@ function isOn(l) {
  */
 function setLightColor(l, c) {
 	l.style.backgroundColor = c;
+}
+
+/**
+ * Sets a light's position
+ * @param {Element} A light created by calling createLight() above
+ * @param {number} x The light's horizontal ("x") coordinate
+ * @param {number} y The light's vertical ("y") coordinate
+ * @param {boolean} [relative] If true, use relative position (default is absolute)
+ * @param {string} [unit] The unit (i.e. "px", "pt", "em", "%", etc. - CSS stuff).
+ * @returns {boolean} True if the light is on, false if it isn't
+ */
+function setLightPosition(l, x, y, relative, unit) {
+	let pos = "absolute";
+	if (relative) pos = "relative";
+	if (!unit) unit = "px";
+	l.style.position = pos;
+	l.style.left = x + unit;
+	l.style.top = y + unit;
 }

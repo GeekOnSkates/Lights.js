@@ -2,32 +2,37 @@
 <html>
 <head>
 <script src="lights.js"></script>
+<script src="letters.js"></script>
 <script>
+function merryChristmas() {
+	let wire = document.createElement("div");
+	wire.style.position = "absolute";
+	wire.style.left = ((window.innerWidth - 520) / 2) + "px";
+	wire.style.top = "10px";
+	let lights = [];
+	for (let i=0; i<177; i++)
+		lights[i] = createLight("red", 10, 0, wire);
+	let i = 0;
+	i = letterM(lights, i, 150, 40);
+	i = letterE(lights, i, 210, 40);
+	i = letterR(lights, i, 270, 40);
+	i = letterR(lights, i, 330, 40);
+	i = letterY(lights, i, 400, 40);
+	i = letterC(lights, i, 30, 135);
+	i = letterH(lights, i, 90, 135);
+	i = letterR(lights, i, 150, 135);
+	i = letterI(lights, i, 210, 135);
+	i = letterS(lights, i, 270, 135);
+	i = letterT(lights, i, 330, 135);
+	i = letterM(lights, i, 400, 135);
+	i = letterA(lights, i, 460, 135);
+	i = letterS(lights, i, 520, 135);
+	return wire;
+}
 function go() {
-	let lights = [
-		createLight("red", 10),
-		createLight("red", 10),
-		createLight("red", 10),
-		createLight("red", 10),
-		createLight("red", 10),
-		createLight("red", 10),
-		createLight("red", 10),
-		createLight("red", 10),
-		createLight("red", 10),
-		createLight("red", 10),
-		createLight("red", 10),
-		createLight("red", 10),
-		createLight("red", 10),
-		createLight("red", 10),
-		createLight("red", 10),
-		createLight("red", 10),
-	];
-	
-	setLightColor(lights[3], "lime");
-	
-	for (let i=0; i<lights.length; i++)
-		if (i % 2 == 0) turnOn(lights[i]);
-	
+	let wire = merryChristmas();
+	document.body.appendChild(wire);
+	let lights = wire.children;
 	setInterval(function(){
 		for (let i=0; i<lights.length; i++) {
 			if (isOn(lights[i]))
